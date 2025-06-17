@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input {
+    @apply px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#008080] w-full;
+}
+
+.active {
+  @apply bg-[#008080] text-white;
+}
+
+.modal { @apply flex; }                 /* permite hidden/flex con JS */
+
+

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval';
+             style-src 'self' 'unsafe-inline';
+             media-src *;
+             img-src 'self' data: content:;" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="msapplication-tap-highlight" content="no" />
+  <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover" />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="stylesheet" href="css/index.css" />
+  <title>Welcome</title>
+</head>
+
+<body class="bg-gradient-to-br from-gray-100 to-white min-h-screen flex flex-col items-center justify-center px-4">
+
+  <!-- Mensaje de bienvenida -->
+  <div class="mb-10 text-center">
+    <h1 class="text-4xl font-extrabold text-[#008080] drop-shadow-sm">¡Bienvenido a la App!</h1>
+    <p class="text-gray-700 mt-2 text-lg">Selecciona una opción para continuar.</p>
+  </div>
+
+  <!-- Botones de acción -->
+  <div class="flex flex-col sm:flex-row gap-4 w-full max-w-md">
+    <!-- Botón externo -->
+    <a href="https://opv.poderjudicialcdmx.gob.mx/opv/" target="_blank" rel="noopener noreferrer"
+      class="flex-1 text-center bg-white border border-[#008080] text-[#008080] py-3 rounded-lg shadow hover:bg-[#008080] hover:text-white transition duration-200">
+      Visitar sitio externo
+    </a>
+
+    <!-- Botón interno -->
+    <a href="pages/auth/login.html"
+      class="flex-1 text-center bg-[#008080] text-white py-3 rounded-lg shadow hover:bg-[#006666] transition duration-200">
+      Entrar a la app
+    </a>
+  </div>
+
+</body>
+
+</html>
