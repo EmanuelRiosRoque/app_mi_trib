@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Layout</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../css/index.css" />
+</head>
+
+<body class="flex bg-gray-100 min-h-screen">
+
+  <!-- Sidebar -->
+  <!-- <div id="sidebar"
+       class="fixed z-40 inset-y-0 left-0 w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-200 ease-in-out md:relative md:translate-x-0 md:block">
+    <div class="p-4 font-bold text-xl text-[#008080] border-b">Mi Panel</div>
+    <nav class="p-4 space-y-2">
+      <a href="#" data-page="home/index" class="nav-link block px-4 py-2 rounded transition">Inicio</a>
+      <a href="#" data-page="seguimientos/index" class="nav-link block px-4 py-2 rounded transition">Mis seguimientos</a>
+      <a href="#" data-page="profile/index" class="nav-link block px-4 py-2 rounded transition">Perfil</a>
+      <a href="#" data-page="settings/index" class="nav-link block px-4 py-2 rounded transition">Configuración</a>
+      <a href="#" data-page="logout/index" class="nav-link block px-4 py-2 rounded transition text-red-600 hover:bg-red-500 hover:text-white">Cerrar sesión</a>
+    </nav>
+  </div> -->
+
+
+  <!-- Sidebar -->
+  <div id="sidebar"
+    class="fixed z-40 inset-y-0 left-0 w-64 bg-white shadow-lg transform -translate-x-full transition-transform duration-200 ease-in-out md:relative md:translate-x-0 md:block">
+    <div class="p-4 font-bold text-xl text-[#008080] border-b">Mi Panel</div>
+    <nav id="sidebar-menu" class="p-4 space-y-2">
+      <!-- Aquí se insertan los botones dinámicamente -->
+    </nav>
+  </div>
+
+
+  <!-- Overlay móvil -->
+  <div id="overlay" class="fixed inset-0 bg-black bg-opacity-30 z-30 hidden md:hidden"></div>
+
+  <!-- Contenido principal -->
+  <div class="flex-1 flex flex-col">
+    <!-- Barra superior -->
+    <header class="bg-white shadow p-4 flex items-center justify-between md:justify-end">
+      <button id="toggleSidebar" class="md:hidden text-[#008080] focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+      <span class="hidden md:block text-gray-700">Bienvenido al panel</span>
+    </header>
+
+    <!-- Área principal que se actualiza -->
+    <main id="mainContent" class="p-6">
+      <!-- Aquí se cargará el contenido -->
+    </main>
+  </div>
+
+
+  <!-- Modal Crear Seguimiento -->
+  <div id="modalCrearSeguimiento" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50">
+    <div class="bg-white rounded-xl shadow-lg w-full max-w-md mx-4 relative">
+      <!-- Encabezado -->
+      <div class="flex justify-between items-center p-4 border-b">
+        <h2 class="text-lg font-semibold text-gray-800">Nuevo seguimiento</h2>
+        <button onclick="cerrarModalSeguimiento()" class="text-gray-500 hover:text-red-600">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Contenido modal -->
+      <div class="p-4 space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <label class="block">
+            <span class="text-gray-700">Expediente / Toca</span>
+            <input type="text" id="expediente" class="input w-full" placeholder="EXPEDIENTE/TOCA" />
+          </label>
+
+          <label class="block">
+            <span class="text-gray-700">Año</span>
+            <select id="anio" class="input w-full">
+              <option value="" selected disabled>--Selecciona--</option>
+              <option value="2025">2025</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+            </select>
+          </label>
+
+          <label class="block md:col-span-1">
+            <span class="text-gray-700">Materia</span>
+            <select id="materia" class="input w-full">
+              <option value="" selected disabled>--Selecciona--</option>
+              <option value="civil">Civil</option>
+              <option value="penal">Penal</option>
+              <option value="familiar">Familiar</option>
+            </select>
+          </label>
+
+          <label class="block md:col-span-1">
+            <span class="text-gray-700">Órgano jurisdiccional</span>
+            <select id="organo" class="input w-full">
+              <option value="" selected disabled>--Selecciona--</option>
+              <option value="juzgado1">Juzgado Primero</option>
+              <option value="juzgado2">Juzgado Segundo</option>
+              <option value="sala">Sala Superior</option>
+            </select>
+          </label>
+        </div>
+
+        <button onclick="buscarSeguimiento()"
+        class="px-4 py-2 bg-[#008080] hover:bg-teal-700 text-white rounded-lg w-full">Buscar</button>
+      </div>
+
+      <!-- Resultado de búsqueda -->
+      <div id="resultadoBusqueda" class="mt-4 hidden border border-gray-200 rounded-lg p-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+          <div>
+            <p><strong>Expediente:</strong><br><span id="resExpediente"></span></p>
+            <p><strong>Órgano Jurisdiccional:</strong><br><span id="resOrgano"></span></p>
+            <p><strong>Juicio:</strong><br><span id="resJuicio"></span></p>
+          </div>
+          <div>
+            <p><strong>Actor:</strong><br><span id="resActor" class="text-green-600">▸ </span></p>
+            <p><strong>Demandado:</strong><br><span id="resDemandado" class="text-green-600">▸ </span></p>
+          </div>
+        </div>
+        <div class="mt-4 text-end">
+          <button class="bg-[#008080] hover:bg-teal-700 text-white px-4 py-2 rounded">Solicitar seguimiento</button>
+        </div>
+      </div>
+
+
+
+      <!-- Botones -->
+      <div class="flex justify-end gap-2 px-4 py-3 border-t">
+        <button onclick="cerrarModalSeguimiento()"
+          class="px-4 py-2 rounded-lg border text-gray-600 hover:bg-gray-100">Cancelar</button>
+       
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    function openSeguimientoModal() {
+      const modal = document.getElementById('modalCrearSeguimiento');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function cerrarModalSeguimiento() {
+      const modal = document.getElementById('modalCrearSeguimiento');
+      modal.classList.remove('flex');
+      modal.classList.add('hidden');
+    
+      // Limpiar campos del formulario
+      document.getElementById('expediente').value = '';
+      document.getElementById('anio').value = '';
+      document.getElementById('materia').value = '';
+      document.getElementById('organo').value = '';
+    
+      // Ocultar resultado
+      document.getElementById('resultadoBusqueda').classList.add('hidden');
+    
+      // Limpiar contenido del resultado
+      document.getElementById('resExpediente').textContent = '';
+      document.getElementById('resOrgano').textContent = '';
+      document.getElementById('resJuicio').textContent = '';
+      document.getElementById('resActor').innerHTML = '';
+      document.getElementById('resDemandado').innerHTML = '';
+    }
+    
+    
+    function buscarSeguimiento() {
+      const expediente = document.getElementById('expediente').value.trim();
+      const anio = document.getElementById('anio').value;
+      const materia = document.getElementById('materia').value;
+      const organo = document.getElementById('organo').value;
+    
+      if (!expediente || !anio || !materia || !organo) {
+        alert('Todos los campos son obligatorios.');
+        return;
+      }
+    
+      // Simula respuesta de una API
+      const data = {
+        expediente: `${expediente} / ${anio}`,
+        organo: "Unidad de Gestión Judicial Tipo 2 Materia Civil Etapa Preliminar, Juicio y Ejecución Número 2",
+        juicio: "CNPCYF - ESPECIAL HIPOTECARIO ORAL",
+        actor: "BANCA AFIRME, SOCIEDAD ANONIMA, INSTITUCION DE BANCA MULTIPLE, AFIRME GRUPO FINANCIERO",
+        demandado: "SANDRA EDITH SILVA LOPEZ"
+      };
+    
+      // Inserta los datos en el HTML
+      document.getElementById('resExpediente').textContent = data.expediente;
+      document.getElementById('resOrgano').textContent = data.organo;
+      document.getElementById('resJuicio').textContent = data.juicio;
+      document.getElementById('resActor').innerHTML = `▸ ${data.actor}`;
+      document.getElementById('resDemandado').innerHTML = `▸ ${data.demandado}`;
+    
+      // Muestra el resultado
+      document.getElementById('resultadoBusqueda').classList.remove('hidden');
+    }
+    
+    
+
+    // Cerrar modal al hacer clic fuera
+    document.addEventListener('click', e => {
+      const modal = document.getElementById('modalCrearSeguimiento');
+      if (!modal.classList.contains('hidden') && e.target === modal) {
+        cerrarModalSeguimiento();
+      }
+    });
+  </script>
+
+
+  <!-- Script funcional -->
+  <script type="module" src="../js/main.js"></script>
+</body>
+
+</html>

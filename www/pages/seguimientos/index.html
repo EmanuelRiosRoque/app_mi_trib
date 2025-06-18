@@ -1,0 +1,38 @@
+<!-- -->
+
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto p-4">
+    <!-- Card 1 -->
+    <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition p-5 border border-gray-100">
+        <div class="flex items-center mb-3">
+            <div class="bg-[#008080] text-white p-2 rounded-full mr-3">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800">Crear seguimiento</h3>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">Agrega un nuevo seguimiento con nombre y descripción.</p>
+        <button onclick="openSeguimientoModal('crear')"
+            class="bg-[#008080] hover:bg-teal-700 text-white px-4 py-2 rounded-lg w-full transition">Crear
+            seguimiento</button>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition p-5 border border-gray-100">
+        <div class="flex items-center mb-3">
+            <div class="bg-[#008080] text-white p-2 rounded-full mr-3">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M15 17h5l-1.405-1.405M4 4l16 16M9 13h6m2 3V6a2 2 0 00-2-2H7a2 2 0 00-2 2v12a2 2 0 002 2h9" />
+                </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800">Mis seguimientos</h3>
+        </div>
+        <p class="text-gray-600 text-sm mb-4">Visualiza el seguimiento.</p>
+        <a href="#" data-page="seguimientos"
+        class="nav-link block bg-[#008080] hover:bg-teal-700 text-white px-4 py-2 rounded-lg w-full text-center transition">
+        Ir a seguimientos
+        </a>
+
+    </div>
+</div>
