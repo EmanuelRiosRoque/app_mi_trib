@@ -1,5 +1,3 @@
-run proyect
-
 npm install
 
 cordova platform add browser
