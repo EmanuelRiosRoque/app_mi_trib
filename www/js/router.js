@@ -15,12 +15,14 @@ export function setupNavigation() {
     overlay.classList.add("hidden");
   });
 
+  // Escucha clics en elementos con [data-page] para navegación
   document.body.addEventListener("click", (e) => {
     const link = e.target.closest("[data-page]");
     if (link) {
       e.preventDefault();
       const page = link.dataset.page;
       loadPage(page);
+      history.pushState({ page }, '', `#${page}`); // <- Actualiza historial
     }
   });
 }
@@ -62,3 +64,9 @@ export async function loadPage(page) {
   sidebar?.classList.remove("translate-x-0");
   overlay?.classList.add("hidden");
 }
+
+// Manejador para botón "atrás" del navegador
+window.addEventListener('popstate', (e) => {
+  const page = (e.state && e.state.page) || 'seguimientos/index';
+  loadPage(page);
+});

@@ -85,33 +85,42 @@
   
     /* ─── Simulación del login ────────────────────────────────────────── */
     // Credenciales válidas de prueba
-    const DEMO_EMAIL    = 'demo@correo.com';
-    const DEMO_PASSWORD = 'password123';
+    const DEMO_EMAIL    = 'correo@correo.com';
+    const DEMO_PASSWORD = '12345678';
   
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-  
+    
       const email    = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value.trim();
-  
+      const submitBtn = loginForm.querySelector('button[type="submit"]');
+    
+      // Desactiva botón y cambia texto
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Ingresando';
+    
       try {
         // Simular “viaje” al servidor con un retardo de 1 s
         await new Promise((res) => setTimeout(res, 1000));
-  
+    
         // Verificamos credenciales locales
         if (email === DEMO_EMAIL && password === DEMO_PASSWORD) {
-          // Éxito: redirigimos al dashboard
-          window.location.href = '../../layouts/dashboard.html';
+          localStorage.setItem('auth', 'true');
+          location.replace('../../layouts/dashboard.html');
         } else {
-          // Error: credenciales incorrectas
-          alert('Credenciales incorrectas (usa demo@correo.com / password123)');
+          alert('Credenciales incorrectas (usa correo@correo.com / 12345678');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Ingresar'; // Restaurar texto y habilitar
         }
-  
+    
       } catch (err) {
         alert('Ocurrió un error inesperado');
         console.error(err);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Ingresar'; // Restaurar en caso de error
       }
     });
+    
   </script>
   
   

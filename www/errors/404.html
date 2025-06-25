@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 - Page Not Found</title>
+  <link rel="stylesheet" href="../css/index.css" />
+  <script>
+    function goHome() {
+      window.location.replace('../layouts/dashboard.html'); // Ajusta la ruta según tu estructura
+    }
+  </script>
+</head>
+<body class="bg-[#1f3d8a] flex items-center justify-center min-h-screen px-4">
+
+  <div class="bg-white shadow-lg rounded-xl w-full max-w-sm p-8 text-center">
+    <img src="/resources/error/img/404.png" alt="Error 404" class="mx-auto mb-6 w-40 h-40 object-contain" />
+
+    <h1 class="text-2xl font-semibold text-gray-800 mb-2">Page Not Found</h1>
+    <p class="text-sm text-gray-500 mb-6">
+      We're sorry, the page you requested could not be found.<br />
+      Please go back to the homepage.
+    </p>
+
+    <button onclick="goHome()"
+      class="bg-[#008080] hover:bg-[#006666] text-white p-4 py-2 rounded-full transition">
+      Ir Al Inicio
+    </button>
+  </div>
+
+</body>
+</html>
